@@ -236,8 +236,8 @@ def op_info(args):
         for name in names:
             d = definitions.get(name)
             r = depl.resources.get(name)
-            assert r is not None
-            if deployment.is_machine(r):
+
+            if r is not None and deployment.is_machine(r):
                 resource_state = "{0} / {1}".format(
                     r.show_state() if r else "Missing", state(depl, d, r)
                 )
