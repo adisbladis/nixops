@@ -1,3 +1,5 @@
+{ ... }:
+
 {
   systemd.targets = {
     deploy-prepare = {

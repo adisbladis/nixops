@@ -16,6 +16,8 @@ in
       ./auto-raid0.nix
       ./auto-luks.nix
       ./keys.nix
+      ./auto-rollback-targets.nix
+      ./auto-rollback.nix
     ];
 
 
