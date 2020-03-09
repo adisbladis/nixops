@@ -4,7 +4,6 @@
       description = "Started immediately before switch-to-configuration.";
       unitConfig = {
         Conflicts = [ "deploy-healthy.target" "deploy-complete.target" "deploy-failed.target" ];
-        X-StopOnReconfiguration = true;
         X-OnlyManualStart = true;
       };
     };
