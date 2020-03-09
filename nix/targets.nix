@@ -5,6 +5,7 @@
       unitConfig = {
         Conflicts = [ "deploy-healthy.target" "deploy-complete.target" "deploy-failed.target" ];
         X-StopOnReconfiguration = true;
+        X-OnlyManualStart = true;
       };
     };
 
@@ -14,6 +15,7 @@
         OnFailure = [ "deploy-failed.target" ];
         Conflicts = [ "deploy-prepare.target" "deploy-failed.target" ];
         X-StopOnReconfiguration = true;
+        X-OnlyManualStart = true;
       };
     };
 
@@ -22,6 +24,7 @@
       unitConfig = {
         Conflicts = [ "deploy-prepare.target" ];
         X-StopOnReconfiguration = true;
+        X-OnlyManualStart = true;
       };
     };
 
@@ -30,6 +33,7 @@
       unitConfig = {
         Conflicts = [ "deploy-prepare.target" ];
         X-StopOnReconfiguration = true;
+        X-OnlyManualStart = true;
       };
     };
 
