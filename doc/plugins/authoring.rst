@@ -28,9 +28,10 @@ Note: NixOps is formatted with ``black`` and strictly typechecked with
 a mypy configuration at least as strict as the NixOps mypy
 configuration.
 
-First, create a ``pyproject.toml`` to describe your project. This is
-intsead of a ``setup.py``, and using both may cause confusing build
-errors. Only use a ``pyproject.toml``::
+First, create a ``pyproject.toml`` (see `PEP-0517
+<https://www.python.org/dev/peps/pep-0517/>`_ to describe your
+project. This is intsead of a ``setup.py``, and using both may cause
+confusing build errors. Only use a ``pyproject.toml``::
 
   [tool.poetry]
   name = "nixops_neatcloud"
