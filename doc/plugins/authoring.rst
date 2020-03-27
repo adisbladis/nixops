@@ -1,7 +1,7 @@
 Authoring a Plugin
 ====
 
-NixOps plugins extend NixOps' core to support additional hosting
+NixOps plugins extend NixOps core to support additional hosting
 providers and resource types.
 
 Some example plugins include:
