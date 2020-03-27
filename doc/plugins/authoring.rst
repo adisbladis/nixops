@@ -23,6 +23,11 @@ Most packages will use <https://python-poetry.org>Poetry_ and
 <https://github.com/nix-community/poetry2nix>poetry2nix_ for
 packaging with Nix.
 
+Note: NixOps is formatted with ``black`` and strictly typechecked with
+``mypy``. Your project should follow these guidelines as well, and use
+a mypy configuration at least as strict as the NixOps mypy
+configuration.
+
 First, create a ``pyproject.toml`` to describe your project. This is
 intsead of a ``setup.py``, and using both may cause confusing build
 errors. Only use a ``pyproject.toml``::
