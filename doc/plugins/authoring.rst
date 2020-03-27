@@ -66,9 +66,7 @@ Exit the Nix shell, and create the supporting Nix files.
 
 Create a ``default.nix``::
 
-  { nixpkgs ? <nixpkgs>
-  , pkgs ? import nixpkgs {}
-  }:
+  { pkgs ? import <nixpkgs> {} }:
   let
     overrides = import ./overrides.nix { inherit pkgs; };
   in pkgs.poetry2nix.mkPoetryApplication {
