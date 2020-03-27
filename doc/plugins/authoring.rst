@@ -125,7 +125,7 @@ you'll be able to list plugins and see your plugin:
 Now you can list plugins and see your plugin is installed::
 
   (nixops_neatcloud-FrXThxiS-py3.7)
-  nixops_neatcloud]$ nixops list-plugins
+  nixops_neatcloud$ nixops list-plugins
   +-------------------+
   | Installed Plugins |
   +-------------------+
