@@ -135,7 +135,7 @@ Now you can list plugins and see your plugin is installed::
 At this point, you can develop your plugin from within this shell,
 running ``nixops`` and ``mypy nixops_neatcloud``./
 
-Pluging Loading
+Plug-in Loading
 =====
 
 NixOps uses `Pluggy <https://pluggy.readthedocs.io/en/latest/>`_ to
