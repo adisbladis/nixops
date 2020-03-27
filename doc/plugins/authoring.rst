@@ -19,8 +19,8 @@ Packaging with Poetry and poetry2nix
 ====
 
 NixOps and its plugins are packaged as standard Python applications.
-Most packages will use `Poetry<https://python-poetry.org>`_ and
-`poetry2nix<https://github.com/nix-community/poetry2nix>`_ for
+Most packages will use `Poetry <https://python-poetry.org>`_ and
+`poetry2nix <https://github.com/nix-community/poetry2nix>`_ for
 packaging with Nix.
 
 Note: NixOps is formatted with ``black`` and strictly typechecked with
@@ -138,7 +138,7 @@ running ``nixops`` and ``mypy nixops_neatcloud``./
 Pluging Loading
 =====
 
-NixOps uses `Pluggy<https://pluggy.readthedocs.io/en/latest/>`_ to
+NixOps uses `Pluggy <https://pluggy.readthedocs.io/en/latest/>`_ to
 discover and load plugins. The glue which hooks things together is in
 ``pyproject.toml``::
 
