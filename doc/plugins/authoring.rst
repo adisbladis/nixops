@@ -70,14 +70,8 @@ Create a ``default.nix``::
   let
     overrides = import ./overrides.nix { inherit pkgs; };
   in pkgs.poetry2nix.mkPoetryApplication {
-    src = pkgs.lib.cleanSource ./.;
-    pyproject = ./pyproject.toml;
-    poetrylock = ./poetry.lock;
-
-    overrides = [
-      pkgs.poetry2nix.defaultPoetryOverrides
-      overrides
-    ];
+    projectDir = ./.;
+    overrides = pkgs.poetry2nix.overrides.withoutDefaults overrides;
   }
 
 And a minimal ``overrides.nix``::
@@ -100,10 +94,7 @@ and finally, a ``shell.nix``::
     buildInputs = [
       (pkgs.poetry2nix.mkPoetryEnv {
         projectDir = ./.;
-        overrides = [
-          pkgs.poetry2nix.defaultPoetryOverrides
-          overrides
-        ];
+        overrides = pkgs.poetry2nix.overrides.withoutDefaults overrides;
       })
       pkgs.poetry
     ];
