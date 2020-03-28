@@ -71,7 +71,7 @@ Create a ``default.nix``::
     overrides = import ./overrides.nix { inherit pkgs; };
   in pkgs.poetry2nix.mkPoetryApplication {
     projectDir = ./.;
-    overrides = pkgs.poetry2nix.overrides.withoutDefaults overrides;
+    overrides = pkgs.poetry2nix.overrides.withDefaults overrides;
   }
 
 And a minimal ``overrides.nix``::
@@ -94,7 +94,7 @@ and finally, a ``shell.nix``::
     buildInputs = [
       (pkgs.poetry2nix.mkPoetryEnv {
         projectDir = ./.;
-        overrides = pkgs.poetry2nix.overrides.withoutDefaults overrides;
+        overrides = pkgs.poetry2nix.overrides.withDefaults overrides;
       })
       pkgs.poetry
     ];
