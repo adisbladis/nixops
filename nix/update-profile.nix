@@ -1,12 +1,13 @@
 { machines }:
 
-with import <nixpkgs> {};
-with lib;
+let
+  pkgs = import <nixpkgs> {};
+  inherit (pkgs) lib;
 
-runCommand "nixops-machines" {}
+in pkgs.runCommand "nixops-machines" {}
   ''
     mkdir -p $out
-    ${concatStrings (mapAttrsToList (n: v: ''
+    ${lib.concatStrings (lib.mapAttrsToList (n: v: ''
       ln -s "${v}" $out/"${n}"
     '') machines)}
   ''
