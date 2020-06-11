@@ -1,8 +1,9 @@
 { config, pkgs, lib, ... }:
 
-with lib;
-
 let
+
+  inherit (lib) mkOption types;
+
   keyOptionsType = types.submodule ({ config, name, ... }: {
     options.text = mkOption {
       example = "super secret stuff";
@@ -121,14 +122,14 @@ let
             + " deprecated, please use `deployment.keys.${key}.text ="
             + " \"<value>\"` instead of `deployment.keys.${key} ="
             + " \"<value>\"`.";
-  in if isString val then builtins.trace warning { text = val; } else val;
+  in if lib.isString val then builtins.trace warning { text = val; } else val;
 
-  keyType = mkOptionType {
+  keyType = lib.mkOptionType {
     name = "string or key options";
-    check = v: isString v || keyOptionsType.check v;
+    check = v: lib.isString v || keyOptionsType.check v;
     merge = loc: defs: let
       convert = def: def // {
-        value = convertOldKeyType (last loc) def.value;
+        value = convertOldKeyType (lib.last loc) def.value;
       };
     in keyOptionsType.merge loc (map convert defs);
     inherit (keyOptionsType) getSubOptions;
@@ -146,7 +147,7 @@ in
       default = {};
       example = { password.text = "foobar"; };
       type = types.attrsOf keyType;
-      apply = mapAttrs convertOldKeyType;
+      apply = lib.mapAttrs convertOldKeyType;
 
       description = ''
 
@@ -177,7 +178,7 @@ in
 
   config = {
 
-    assertions = (flip mapAttrsToList config.deployment.keys (key: opts: {
+    assertions = (lib.flip lib.mapAttrsToList config.deployment.keys (key: opts: {
       assertion = (opts.text == null && opts.keyFile != null && opts.keyCommand == null) ||
                   (opts.text != null && opts.keyFile == null && opts.keyCommand == null) ||
                   (opts.text == null && opts.keyFile == null && opts.keyCommand != null);
@@ -190,7 +191,7 @@ in
           mkdir -p /run/keys -m 0750
           chown root:keys /run/keys
 
-          ${concatStringsSep "\n" (flip mapAttrsToList config.deployment.keys (name: value:
+          ${lib.concatStringsSep "\n" (lib.flip lib.mapAttrsToList config.deployment.keys (name: value:
               # Make sure each key has correct ownership, since the configured owning
               # user or group may not have existed when first uploaded.
               ''
@@ -198,12 +199,12 @@ in
               ''
           ))}
         '';
-        in stringAfter [ "users" "groups" ] "source ${pkgs.writeText "setup-keys.sh" script}";
+        in lib.stringAfter [ "users" "groups" ] "source ${pkgs.writeText "setup-keys.sh" script}";
 
     systemd.services = (
       { nixops-keys =
-        { enable = any (key: hasPrefix "/run/" key.destDir) (
-            attrValues config.deployment.keys
+        { enable = lib.any (key: lib.hasPrefix "/run/" key.destDir) (
+            lib.attrValues config.deployment.keys
           );
           description = "Waiting for NixOps Keys";
           wantedBy = [ "keys.target" ];
@@ -220,8 +221,8 @@ in
         };
       }
       //
-      (flip mapAttrs' config.deployment.keys (name: keyCfg:
-        nameValuePair "${name}-key" {
+      (lib.flip lib.mapAttrs' config.deployment.keys (name: keyCfg:
+        lib.nameValuePair "${name}-key" {
           enable = true;
           serviceConfig.TimeoutStartSec = "infinity";
           serviceConfig.Restart = "always";
