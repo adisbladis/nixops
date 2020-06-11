@@ -1,8 +1,8 @@
 { config, lib, ... }:
 
-with lib;
-
 let
+
+  inherit (lib) mkOption types;
 
   cfg = config.deployment;
 
@@ -167,8 +167,8 @@ in
 
     _type = "machine";
 
-    deployment.targetHost = mkDefault config.networking.hostName;
-    deployment.targetPort = mkDefault (head config.services.openssh.ports);
+    deployment.targetHost = lib.mkDefault config.networking.hostName;
+    deployment.targetPort = lib.mkDefault (lib.head config.services.openssh.ports);
 
   };
 
