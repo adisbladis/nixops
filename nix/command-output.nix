@@ -1,6 +1,9 @@
 { pkgs, config, lib, name ? "default-output", ... }:
-with lib;
-{
+
+let
+  inherit (lib) mkOption types;
+
+in {
   options = {
     name = mkOption {
       default = name;
@@ -14,7 +17,7 @@ with lib;
       description = ''
         Text of a script which will produce a JSON value.
         <warning>Warning: This uses shell features and is potentially dangerous.</warning>
-        Environment variables: 
+        Environment variables:
         <envar>$out</envar> is a temp directory available for use.
         '';
     };
